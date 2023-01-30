@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Message {
     @Id
@@ -19,4 +18,9 @@ public class Message {
     private Integer id;
     private String tag;
     private String text;
+
+    public Message(String tag, String text) {
+        this.tag = tag;
+        this.text = text;
+    }
 }
