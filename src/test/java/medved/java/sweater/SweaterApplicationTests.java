@@ -1,4 +1,4 @@
-package medved.jaav.sweater;
+package medved.java.sweater;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

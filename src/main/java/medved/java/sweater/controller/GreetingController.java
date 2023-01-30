@@ -1,7 +1,6 @@
-package medved.jaav.sweater.controller;
+package medved.java.sweater.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
