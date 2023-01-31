@@ -1,11 +1,7 @@
 package medved.java.sweater.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,8 +14,11 @@ public class Message {
     private Integer id;
     private String tag;
     private String text;
-
-    public Message(String tag, String text) {
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User author;
+    public Message(String tag, String text, User author) {
+        this.author = author;
         this.tag = tag;
         this.text = text;
     }

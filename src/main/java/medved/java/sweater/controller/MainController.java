@@ -1,8 +1,10 @@
 package medved.java.sweater.controller;
 
 import medved.java.sweater.entity.Message;
+import medved.java.sweater.entity.User;
 import medved.java.sweater.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,11 +33,12 @@ public class MainController {
 
     @PostMapping("/main")
     public String addMessage(
+            @AuthenticationPrincipal User user,
             @RequestParam String tag,
             @RequestParam String text,
             Map<String, Object> model
     ) {
-        messageRepository.save(new Message(tag, text));
+        messageRepository.save(new Message(tag, text, user));
         main(model);
         return "main";
     }

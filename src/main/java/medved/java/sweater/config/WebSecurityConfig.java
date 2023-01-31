@@ -1,9 +1,9 @@
 package medved.java.sweater.config;
 
+import medved.java.sweater.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,8 +16,10 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+//    @Autowired
+//    private DataSource dataSource;
     @Autowired
-    private DataSource dataSource;
+    private UserService userService;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -40,14 +42,15 @@ public class WebSecurityConfig {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .passwordEncoder(NoOpPasswordEncoder.getInstance())
-                .usersByUsernameQuery("select username, password, active from usr where username=?")
-                .authoritiesByUsernameQuery(
-                        "select u.username, ur.roles " +
-                                "from usr u inner join user_role ur on u.id = ur.user_id " +
-                                "where u.username=?");
+//        auth.jdbcAuthentication()
+//                .dataSource(dataSource)
+//                .passwordEncoder(NoOpPasswordEncoder.getInstance())
+//                .usersByUsernameQuery("select username, password, active from usr where username=?")
+//                .authoritiesByUsernameQuery(
+//                        "select u.username, ur.roles " +
+//                                "from usr u inner join user_role ur on u.id = ur.user_id " +
+//                                "where u.username=?");
+        auth.userDetailsService(userService).passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 
 }
