@@ -39,7 +39,7 @@ public class MainController {
             Map<String, Object> model
     ) {
         messageRepository.save(new Message(tag, text, user));
-        main(model);
+        model.put("messages", messageRepository.findAll());
         return "main";
     }
 

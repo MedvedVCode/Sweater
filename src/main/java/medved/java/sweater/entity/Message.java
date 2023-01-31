@@ -17,9 +17,13 @@ public class Message {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
-    public Message(String tag, String text, User author) {
-        this.author = author;
+    public Message(String tag, String text, User user) {
+        this.author = user;
         this.tag = tag;
         this.text = text;
+    }
+
+    public String getAuthorName(){
+        return author != null ? author.getUsername() : "<none>";
     }
 }

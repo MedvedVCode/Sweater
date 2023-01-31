@@ -11,8 +11,6 @@ import org.springframework.security.config.annotation.web.configurers.LogoutConf
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import javax.sql.DataSource;
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
