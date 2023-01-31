@@ -15,28 +15,41 @@ public class GreetingController {
     @Autowired
     private MessageRepository messageRepository;
 
-    @GetMapping("/greeting")
+    @GetMapping("/")
     public String greeting(
-            @RequestParam(name = "name", required = false, defaultValue = "World") String name,
+//            @RequestParam(name = "name", required = false, defaultValue = "World") String name,
             Map<String, Object> model) {
-        model.put("name", name);
+//        model.put("name", name);
         return "greeting";
     }
 
-    @GetMapping("/")
+    @GetMapping("/main")
     public String main(Map<String, Object> model) {
         model.put("messages", messageRepository.findAll());
         return "main";
     }
 
-    @PostMapping("/")
+    @PostMapping("/main")
     public String addMessage(
-            @RequestParam String text,
             @RequestParam String tag,
+            @RequestParam String text,
             Map<String, Object> model
     ) {
-        messageRepository.save(new Message(text, tag));
+        messageRepository.save(new Message(tag, text));
         main(model);
+        return "main";
+    }
+
+    @PostMapping("/filter")
+    public String filterByTag(
+            @RequestParam String filter,
+            Map<String, Object> model
+    ) {
+        if (filter != null && !filter.isEmpty()) {
+            model.put("messages", messageRepository.findByTag(filter));
+        } else {
+            model.put("messages", messageRepository.findAll());
+        }
         return "main";
     }
 }

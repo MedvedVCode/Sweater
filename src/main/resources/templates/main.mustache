@@ -4,18 +4,32 @@
     </head>
     <body>
         <div>
+            <form action="/logout" method="post">
+                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                <input type="submit" value="Sign Out">
+            </form>
+        </div>
+        <div>
             <form method="post">
                 <input type="text" name="text" placeholder="Enter message's text">
                 <input type="text" name = "tag" placeholder="Enter message's tag">
+                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
                 <button type="submit">Add message</button>
+            </form>
+        </div>
+        <div>
+            <form method="post" action="filter">
+                <input type="text" name="filter">
+                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                <button type="submit">Filter by Tag</button>
             </form>
         </div>
         <div> Message list:</div>
         {{#messages}}
             <div>
                 <b>{{id}}</b>
-                <span>{{text}}</span>
-                <i>{{tag}}</i>
+                <span>{{tag}}</span>
+                <i>{{text}}</i>
             </div>
         {{/messages}}
     </body>
