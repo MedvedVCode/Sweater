@@ -1,10 +1,12 @@
 package medved.java.sweater.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Set;
 
 @Entity
+@Data
 @Table(name="usr")
 public class User {
     @Id
