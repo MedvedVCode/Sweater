@@ -4,6 +4,7 @@
 <@c.page>
         <div>
             <@l.logout />
+            <span><a href="/user"> User list </a> </span>
         </div>
         <div>
             <form method="post">
@@ -15,7 +16,7 @@
         </div>
         <div>
             <form method="get" action="main">
-                <input type="text" name="filter" value="${filter}">
+                <input type="text" name="filter" value="<#if filter??>${filter}</#if>">
                 <button type="submit">Filter by Tag</button>
             </form>
         </div>
